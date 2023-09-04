@@ -1,0 +1,29 @@
+name: My First Automation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+          - 'storybook/**'
+  workflow_dispatch:
+    inputs:
+        story_title:
+          description: "A short title for the story"
+          required: true
+        author_name:
+          description: "The author's name"
+          required: true
+   
+jobs:
+  generate-story:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate story
+        run: |
+          echo "Once upon a time in a faraway land"
+          echo "${{ github.event.inputs.story_title }} was written by ${{ github.event.inputs.author_name }}"
+          echo "This whimsical tale takes you on a journey through a magical forest where every flower could talk."
+          echo "Will you explore its secrets?"
